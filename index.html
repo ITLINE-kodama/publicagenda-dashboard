@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet">
+<title>公共の論点（Public AGENDA）進捗ダッシュボード</title>
+<style>
+:root{
+  --ink:#14263D; --sub:#5C7085; --line:#D9E2EC; --bg:#F7FAFC; --card:#FFFFFF;
+  --navy:#0B2E59; --navy-deep:#071B3A;
+  --done:#1E7A46; --done-bg:#DCF3E6;
+  --wait:#8A5E12; --wait-bg:#FBF0DC;
+  --block:#5C7085; --block-bg:#EDF2F7;
+  --ng:#C0271D; --ng-bg:#FBE9E7;
+  --decide:#8C3FA8; --decide-bg:#F3E8FA;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Hiragino Kaku Gothic ProN","Yu Gothic Medium","Yu Gothic",Meiryo,sans-serif;font-size:15px;color:var(--ink);background:var(--bg);line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding:40px 24px 80px}
+.eyebrow{font-size:12.5px;font-weight:700;letter-spacing:.14em;color:var(--navy)}
+h1{font-size:30px;font-weight:700;margin:4px 0 6px}
+.meta{color:var(--sub);font-size:13px;text-align:right;line-height:1.7}
+.meta b{color:var(--ink)}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
+h2{font-size:20px;font-weight:700;margin:56px 0 6px}
+.lede{color:var(--sub);font-size:13.5px;margin-bottom:18px}
+/* KPI cards */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(196px,1fr));gap:14px;margin-top:26px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.kpi .lbl{font-size:12.5px;font-weight:700;color:var(--sub);letter-spacing:.02em}
+.kpi .num{font-size:27px;font-weight:700;margin:2px 0}
+.kpi .sub{font-size:12.5px;color:var(--sub)}
+.kpi.done{border-color:#BFE3CC;background:#F4FBF6}
+.kpi.done .lbl,.kpi.done .num{color:var(--done)}
+.kpi.wait{border-color:#EAD9AF;background:#FDFAF1}
+.kpi.wait .lbl,.kpi.wait .num{color:var(--wait)}
+.kpi.decide{border-color:#DBC3E8;background:#FBF6FE}
+.kpi.decide .lbl,.kpi.decide .num{color:var(--decide)}
+.bar{height:7px;background:#E4ECF3;border-radius:99px;overflow:hidden;margin-top:9px;display:flex}
+.bar i{display:block;height:100%}
+/* timeline */
+.tl{position:relative;margin-left:96px;border-left:2px solid var(--line);padding:6px 0 6px 26px}
+.tl-item{position:relative;margin-bottom:22px}
+.tl-item::before{content:"";position:absolute;left:-33px;top:6px;width:12px;height:12px;border-radius:50%;background:#9DB2C5;border:2.5px solid var(--bg)}
+.tl-item.done::before{background:var(--done)}
+.tl-item.today::before{background:var(--navy)}
+.tl-item.next::before{background:#fff;border:3px solid var(--wait)}
+.tl-date{position:absolute;left:-122px;top:2px;width:80px;text-align:right;font-size:12.5px;font-weight:700;color:var(--sub);letter-spacing:.02em}
+.tl-month{margin:26px 0 18px -122px;font-size:13px;font-weight:700;color:var(--sub)}
+.tl-title{font-weight:700;font-size:15px}
+.tl-item.done .tl-title{color:#46617C;font-weight:600}
+.tl-sub{font-size:12.5px;color:var(--sub);margin-top:2px}
+.today-pill{display:inline-block;background:var(--navy);color:#fff;font-weight:700;font-size:13.5px;border-radius:8px;padding:3px 14px}
+/* badges */
+.b{display:inline-block;font-size:12px;font-weight:700;border-radius:99px;padding:1.5px 11px;vertical-align:1px;margin-right:5px;white-space:nowrap}
+.b.cat{background:#E8EEF5;color:var(--navy)}
+.b.done{background:var(--done-bg);color:var(--done)}
+.b.wait{background:var(--wait-bg);color:var(--wait)}
+.b.block{background:var(--block-bg);color:var(--block)}
+.b.ng{background:var(--ng-bg);color:var(--ng)}
+.b.decide{background:var(--decide-bg);color:var(--decide)}
+.b.ready{background:#DEEAFB;color:#2C5C96}
+/* progress section */
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 20px}
+.panel h3{font-size:14.5px;font-weight:700;margin-bottom:12px}
+.prow{display:flex;align-items:center;gap:10px;margin-bottom:9px;font-size:13px}
+.prow .nm{width:112px;flex-shrink:0}
+.prow .ct{min-width:70px;max-width:46%;text-align:right;color:var(--sub);flex-shrink:0;font-variant-numeric:tabular-nums;font-size:12px}
+.pbar{flex:1;height:8px;background:#E4ECF3;border-radius:99px;overflow:hidden}
+.pbar i{display:block;height:100%;border-radius:99px}
+/* table */
+.controls{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
+.controls select,.controls input{font:inherit;font-size:13.5px;padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink)}
+.controls input{flex:1;min-width:180px}
+.count{font-size:12.5px;color:var(--sub);margin-bottom:8px}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:13.5px}
+th{background:var(--navy-deep);color:#fff;font-size:12.5px;text-align:left;padding:9px 12px;font-weight:700;white-space:nowrap}
+td{padding:10px 12px;border-top:1px solid #EDF2F7;vertical-align:top}
+tr.r-done td{background:#F7FCF8}
+tr.r-ng td{background:#FDF6F5}
+td .nm{font-weight:700}
+td .nt{font-size:12px;color:var(--sub);margin-top:2px}
+.idcell{white-space:nowrap;font-weight:700;color:var(--sub);font-variant-numeric:tabular-nums}
+.idcell.k{color:var(--done)}
+.owner{white-space:nowrap}
+.tblwrap{overflow-x:auto;border-radius:10px}
+.note{background:#EDF2F7;border-radius:8px;padding:12px 16px;font-size:12.5px;color:#3E5570;margin-top:36px;line-height:1.8}
+@media (max-width:700px){.tl{margin-left:8px}.tl-date{position:static;width:auto;text-align:left;display:block;margin-bottom:2px}.tl-month{margin-left:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="head">
+    <div>
+      <div class="eyebrow">PUBLIC AGENDA / OWNED MEDIA</div>
+      <h1>「公共の論点」 進捗ダッシュボード</h1>
+    </div>
+    <div class="meta"><b>基準日</b>　2026年8月8日（残タスク一覧 8/4版準拠）<br>作成：<b>株式会社ITLINE</b></div>
+  </div>
+
+  <!-- KPI -->
+  <div class="kpis">
+    <div class="kpi done">
+      <div class="lbl">✓ 本番公開済み</div>
+      <div class="num">7月末</div>
+      <div class="sub">publicagenda.jp にて公開中</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">公開前テスト（全135項目）</div>
+      <div class="num">119 <span style="font-size:15px">OK（88%）</span></div>
+      <div class="sub">公開後対応13／保留4／対応不可1</div>
+      <div class="bar"><i style="width:88%;background:var(--done)"></i><i style="width:10%;background:#D9A93F"></i><i style="width:2%;background:var(--ng)"></i></div>
+    </div>
+    <div class="kpi wait">
+      <div class="lbl">グラビス様 ご提供待ち</div>
+      <div class="num">4<span style="font-size:15px">件</span></div>
+      <div class="sub">メール・会社情報・GAタグ・記事<br>→ 弊社作業5件がここで待機中</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">ITLINE 残作業</div>
+      <div class="num">13<span style="font-size:15px">件</span></div>
+      <div class="sub">着手可能 8件／ご提供待ち 5件</div>
+    </div>
+    <div class="kpi decide">
+      <div class="lbl">ご決定いただきたい事項</div>
+      <div class="num">1<span style="font-size:15px">件</span></div>
+      <div class="sub">ACADEMYランク基準（調査済み）</div>
+    </div>
+  </div>
+
+  <!-- Schedule -->
+  <h2>スケジュール</h2>
+  <div class="lede">4月キックオフ→7月末本番公開まで完了。現在は本公開（検収）に向けた仕上げフェーズです。</div>
+  <div class="tl">
+    <div class="tl-month">2026年4月</div>
+    <div class="tl-item done"><span class="tl-date">04/01</span>
+      <div class="tl-title">✓ キックオフ（メディア方針・A案デザイン・会員機能の確定）</div>
+      <div class="tl-sub"><span class="b cat">要件</span><span class="b done">完了</span></div>
+    </div>
+    <div class="tl-item done"><span class="tl-date">04/10</span>
+      <div class="tl-title">✓ 要件定義・ガントチャート共有（ランク案・規約案含む）</div>
+      <div class="tl-sub"><span class="b cat">要件</span><span class="b done">完了</span></div>
+    </div>
+    <div class="tl-month">2026年6月</div>
+    <div class="tl-item done"><span class="tl-date">06/17</span>
+      <div class="tl-title">✓ WEBサイト修正MTG（実装8〜9割）</div>
+      <div class="tl-sub"><span class="b cat">制作</span><span class="b done">完了</span></div>
+    </div>
+    <div class="tl-item done"><span class="tl-date">06/24-25</span>
+      <div class="tl-title">✓ 修正点洗い出しMTG・要件整理表・テスト環境ライブ確認</div>
+      <div class="tl-sub"><span class="b cat">制作</span><span class="b done">完了</span></div>
+    </div>
+    <div class="tl-month">2026年7月</div>
+    <div class="tl-item done"><span class="tl-date">07/17</span>
+      <div class="tl-title">✓ 公開前テスト項目書 一次確認完了（135項目）</div>
+      <div class="tl-sub"><span class="b cat">品質確認</span><span class="b done">完了</span></div>
+    </div>
+    <div class="tl-item done"><span class="tl-date">7月末</span>
+      <div class="tl-title">✓ 本番公開（publicagenda.jp）</div>
+      <div class="tl-sub"><span class="b cat">公開</span><span class="b done">完了</span></div>
+    </div>
+    <div class="tl-item done"><span class="tl-date">07/30-31</span>
+      <div class="tl-title">✓ 掲示板メッセージUI改善4件／ご要望5件対応（ペイウォール・スタートページ 等）</div>
+      <div class="tl-sub"><span class="b cat">改善対応</span><span class="b done">完了</span></div>
+    </div>
+    <div class="tl-month">2026年8月</div>
+    <div class="tl-item done"><span class="tl-date">08/04</span>
+      <div class="tl-title">✓ 残タスク一覧のご提出／承認制ワークフローは対応不可としてご報告</div>
+      <div class="tl-sub"><span class="b cat">進行管理</span><span class="b done">完了</span></div>
+    </div>
+    <div class="tl-item today"><span class="tl-date">TODAY</span>
+      <div class="tl-title"><span class="today-pill">本日　2026年8月8日</span></div>
+    </div>
+    <div class="tl-item next"><span class="tl-date">ご提供後</span>
+      <div class="tl-title">ご提供4点の受領 → メール設定一式・法務ページ反映・GA設置</div>
+      <div class="tl-sub"><span class="b cat">仕上げ</span><span class="b wait">ご提供待ち</span>グラビス様→ITLINE</div>
+    </div>
+    <div class="tl-item next"><span class="tl-date">その後</span>
+      <div class="tl-title">公開後設定（Search Console・パスワード変更・テストアカウント整理 等）→ 操作マニュアル納品</div>
+      <div class="tl-sub"><span class="b cat">仕上げ</span><span class="b block">未着手</span>ITLINE</div>
+    </div>
+    <div class="tl-item next"><span class="tl-date">完了時</span>
+      <div class="tl-title">残作業完了 → 検収</div>
+      <div class="tl-sub"><span class="b cat">検収</span><span class="b block">予定</span>全員</div>
+    </div>
+  </div>
+
+  <!-- Progress -->
+  <h2>進捗</h2>
+  <div class="lede">テスト項目書の確認結果と、残タスクの内訳。</div>
+  <div class="grid3">
+    <div class="panel">
+      <h3>テスト項目書（全135項目）</h3>
+      <div class="prow"><span class="nm">OK</span><div class="pbar"><i style="width:88%;background:var(--done)"></i></div><span class="ct">119件 88%</span></div>
+      <div class="prow"><span class="nm">公開後対応</span><div class="pbar"><i style="width:10%;background:#D9A93F"></i></div><span class="ct">13件 10%</span></div>
+      <div class="prow"><span class="nm">保留</span><div class="pbar"><i style="width:3%;background:#9DB2C5"></i></div><span class="ct">4件 3%</span></div>
+      <div class="prow"><span class="nm">対応不可</span><div class="pbar"><i style="width:1%;background:var(--ng)"></i></div><span class="ct">1件 1%</span></div>
+    </div>
+    <div class="panel">
+      <h3>残タスク（担当別）</h3>
+      <div class="prow"><span class="nm">グラビス様</span><div class="pbar"><i style="width:28%;background:var(--wait)"></i></div><span class="ct">5件（ご提供4・ご決定1）</span></div>
+      <div class="prow"><span class="nm">ITLINE 着手可能</span><div class="pbar"><i style="width:44%;background:#2C5C96"></i></div><span class="ct">8件</span></div>
+      <div class="prow"><span class="nm">ITLINE 待機中</span><div class="pbar"><i style="width:28%;background:#9DB2C5"></i></div><span class="ct">5件（ご提供待ち）</span></div>
+      <div style="font-size:12px;color:var(--sub);margin-top:10px">※ 待機中5件はご提供4点の受領後、速やかに着手します。</div>
+    </div>
+    <div class="panel">
+      <h3>カテゴリ別（残タスク18件）</h3>
+      <div class="prow"><span class="nm">メール・フォーム</span><div class="pbar"><i style="width:22%;background:var(--navy)"></i></div><span class="ct">4件</span></div>
+      <div class="prow"><span class="nm">法務ページ</span><div class="pbar"><i style="width:11%;background:var(--navy)"></i></div><span class="ct">2件</span></div>
+      <div class="prow"><span class="nm">アクセス解析</span><div class="pbar"><i style="width:11%;background:var(--navy)"></i></div><span class="ct">2件</span></div>
+      <div class="prow"><span class="nm">コンテンツ</span><div class="pbar"><i style="width:11%;background:var(--navy)"></i></div><span class="ct">2件</span></div>
+      <div class="prow"><span class="nm">公開後設定</span><div class="pbar"><i style="width:39%;background:var(--navy)"></i></div><span class="ct">7件</span></div>
+      <div class="prow"><span class="nm">ACADEMY</span><div class="pbar"><i style="width:6%;background:var(--decide)"></i></div><span class="ct">1件</span></div>
+    </div>
+  </div>
+
+  <!-- Task table -->
+  <h2>タスク一覧</h2>
+  <div class="lede">■ 完了実績も含む全29件。「前提」欄があるタスクは、該当のご提供後に着手します。</div>
+  <div class="controls">
+    <select id="fOwner"><option value="">担当：すべて</option><option>ITLINE</option><option>グラビス様</option><option>ITLINE・制作チーム</option></select>
+    <select id="fStatus"><option value="">ステータス：すべて</option><option>完了</option><option>ご提供待ち</option><option>ご決定待ち</option><option>着手可能</option><option>待機中</option><option>対応不可</option></select>
+    <select id="fCat"><option value="">カテゴリ：すべて</option><option>メール・フォーム</option><option>法務ページ</option><option>アクセス解析</option><option>コンテンツ</option><option>公開後設定</option><option>マニュアル</option><option>ACADEMY</option><option>会員機能</option><option>UI改善</option><option>掲示板</option><option>公開・品質</option></select>
+    <input id="fText" type="search" placeholder="検索（タスク名・メモ）">
+  </div>
+  <div class="count"><span id="cnt"></span></div>
+  <div class="tblwrap">
+  <table id="tbl">
+    <thead><tr><th>ID</th><th>タスク</th><th>担当</th><th>ステータス</th><th>前提</th><th>カテゴリ</th></tr></thead>
+    <tbody>
+      <!-- 完了実績 -->
+      <tr data-s="完了" data-c="公開・品質"><td class="idcell k">✓P-01</td><td><span class="nm">本番公開（publicagenda.jp）</span><div class="nt">2026年7月末 公開済み</div></td><td class="owner">ITLINE</td><td><span class="b done">完了</span></td><td>—</td><td>公開・品質</td></tr>
+      <tr data-s="完了" data-c="公開・品質"><td class="idcell k">✓P-02</td><td><span class="nm">公開前テスト項目書 一次確認（全135項目）</span><div class="nt">OK119／不具合抽出・優先度付けまで完了（7/17）</div></td><td class="owner">ITLINE</td><td><span class="b done">完了</span></td><td>—</td><td>公開・品質</td></tr>
+      <tr data-s="完了" data-c="掲示板"><td class="idcell k">✓P-03</td><td><span class="nm">掲示板1対1メッセージUI改善 4件</span><div class="nt">通知・日本語化・導線・誤送信防止（7/30）</div></td><td class="owner">ITLINE・制作チーム</td><td><span class="b done">完了</span></td><td>—</td><td>掲示板</td></tr>
+      <tr data-s="完了" data-c="会員機能"><td class="idcell k">✓P-04</td><td><span class="nm">ご要望① 非会員は記事800字まで（ペイウォール）</span><div class="nt">RSS・APIの抜け道も制限（7/31）</div></td><td class="owner">ITLINE</td><td><span class="b done">完了</span></td><td>—</td><td>会員機能</td></tr>
+      <tr data-s="完了" data-c="UI改善"><td class="idcell k">✓P-05</td><td><span class="nm">ご要望②③ アカウントメニュー並び替え・「コミュニティ」改名</span><div class="nt">メニュー・パンくず・フレーズ一式（7/31）</div></td><td class="owner">ITLINE</td><td><span class="b done">完了</span></td><td>—</td><td>UI改善</td></tr>
+      <tr data-s="完了" data-c="会員機能"><td class="idcell k">✓P-06</td><td><span class="nm">ご要望④ ログイン後スタートページ（/start/）</span><div class="nt">権限別の行き先カード・リダイレクト制御。3ロールで実機検証済み</div></td><td class="owner">ITLINE</td><td><span class="b done">完了</span></td><td>—</td><td>会員機能</td></tr>
+      <tr data-s="完了" data-c="UI改善"><td class="idcell k">✓P-07</td><td><span class="nm">ご要望⑤ 公式メディア欄・フッターSNSアイコン化</span><div class="nt">公式ロゴ素材で差し替え。リンクはURL確定後（7/31）</div></td><td class="owner">ITLINE</td><td><span class="b done">完了</span></td><td>—</td><td>UI改善</td></tr>
+      <tr data-s="完了" data-c="コンテンツ"><td class="idcell k">✓P-08</td><td><span class="nm">Crosstalk動画対応（URL欄・会員限定プレイヤー・一覧モーダル再生）</span><div class="nt">未ログインには動画URL非出力（7/31）</div></td><td class="owner">ITLINE</td><td><span class="b done">完了</span></td><td>—</td><td>コンテンツ</td></tr>
+      <tr data-s="完了" data-c="UI改善"><td class="idcell k">✓P-09</td><td><span class="nm">アイキャッチ文字切れ対策（ぼかし背景方式）</span><div class="nt">ヒーロー・注目記事・記事詳細に適用（7/31）</div></td><td class="owner">ITLINE</td><td><span class="b done">完了</span></td><td>—</td><td>UI改善</td></tr>
+      <tr data-s="完了" data-c="公開・品質"><td class="idcell k">✓P-10</td><td><span class="nm">残タスク一覧のご提出</span><div class="nt">検収に向けた整理（8/4）</div></td><td class="owner">ITLINE</td><td><span class="b done">完了</span></td><td>—</td><td>公開・品質</td></tr>
+      <!-- グラビス様 -->
+      <tr data-s="ご提供待ち" data-c="メール・フォーム"><td class="idcell">A-1</td><td><span class="nm">お問い合わせ受信用メールアドレスのご提供</span><div class="nt">例：info@publicagenda.jp</div></td><td class="owner">グラビス様</td><td><span class="b wait">ご提供待ち</span></td><td>—</td><td>メール・フォーム</td></tr>
+      <tr data-s="ご提供待ち" data-c="法務ページ"><td class="idcell">A-2</td><td><span class="nm">会社情報のご提供</span><div class="nt">社名・電話・住所・メール・ご担当者（利用規約等への記載用）</div></td><td class="owner">グラビス様</td><td><span class="b wait">ご提供待ち</span></td><td>—</td><td>法務ページ</td></tr>
+      <tr data-s="ご提供待ち" data-c="アクセス解析"><td class="idcell">A-3</td><td><span class="nm">Googleアナリティクスのタグご提供</span><div class="nt">貴社アカウントで管理される場合</div></td><td class="owner">グラビス様</td><td><span class="b wait">ご提供待ち</span></td><td>—</td><td>アクセス解析</td></tr>
+      <tr data-s="ご提供待ち" data-c="コンテンツ"><td class="idcell">A-4</td><td><span class="nm">本公開用の記事のご準備</span></td><td class="owner">グラビス様</td><td><span class="b wait">ご提供待ち</span></td><td>—</td><td>コンテンツ</td></tr>
+      <tr data-s="ご決定待ち" data-c="ACADEMY"><td class="idcell">A-5</td><td><span class="nm">ACADEMYランク基準のご決定</span><div class="nt">視聴実績ベース（要件案）か現行ポイント制か。8/4 調査結果あり・表示文言修正はご決定後に実施</div></td><td class="owner">グラビス様</td><td><span class="b decide">ご決定待ち</span></td><td>—</td><td>ACADEMY</td></tr>
+      <!-- ITLINE -->
+      <tr data-s="待機中" data-c="メール・フォーム"><td class="idcell">B-1</td><td><span class="nm">お問い合わせフォームの設置</span><div class="nt">テスト項目書 No.134</div></td><td class="owner">ITLINE</td><td><span class="b block">待機中</span></td><td>A-1</td><td>メール・フォーム</td></tr>
+      <tr data-s="待機中" data-c="メール・フォーム"><td class="idcell">B-2</td><td><span class="nm">メール受信テスト・自動返信設定</span><div class="nt">迷惑メール振り分け確認含む（No.98・99）</div></td><td class="owner">ITLINE</td><td><span class="b block">待機中</span></td><td>A-1</td><td>メール・フォーム</td></tr>
+      <tr data-s="待機中" data-c="メール・フォーム"><td class="idcell">B-3</td><td><span class="nm">スパム対策の設定</span><div class="nt">No.102</div></td><td class="owner">ITLINE</td><td><span class="b block">待機中</span></td><td>A-1</td><td>メール・フォーム</td></tr>
+      <tr data-s="待機中" data-c="法務ページ"><td class="idcell">B-4</td><td><span class="nm">利用規約・プライバシーポリシーへの会社情報反映</span><div class="nt">制定日・社名・住所・連絡先、運営者情報（No.105・130）</div></td><td class="owner">ITLINE</td><td><span class="b block">待機中</span></td><td>A-2</td><td>法務ページ</td></tr>
+      <tr data-s="待機中" data-c="アクセス解析"><td class="idcell">B-5</td><td><span class="nm">アクセス解析タグ（GA4等）の設置</span><div class="nt">No.129</div></td><td class="owner">ITLINE</td><td><span class="b block">待機中</span></td><td>A-3</td><td>アクセス解析</td></tr>
+      <tr data-s="着手可能" data-c="公開後設定"><td class="idcell">B-6</td><td><span class="nm">sitemap.xml確認・Search Console登録</span><div class="nt">No.4</div></td><td class="owner">ITLINE</td><td><span class="b ready">着手可能</span></td><td>—</td><td>公開後設定</td></tr>
+      <tr data-s="着手可能" data-c="公開後設定"><td class="idcell">B-7</td><td><span class="nm">管理者パスワードの変更</span><div class="nt">No.124</div></td><td class="owner">ITLINE</td><td><span class="b ready">着手可能</span></td><td>—</td><td>公開後設定</td></tr>
+      <tr data-s="着手可能" data-c="公開後設定"><td class="idcell">B-8</td><td><span class="nm">テストアカウントの削除・棚卸し</span><div class="nt">No.122</div></td><td class="owner">ITLINE</td><td><span class="b ready">着手可能</span></td><td>—</td><td>公開後設定</td></tr>
+      <tr data-s="待機中" data-c="コンテンツ"><td class="idcell">B-9</td><td><span class="nm">本公開用画像へのalt属性設定</span><div class="nt">No.126</div></td><td class="owner">ITLINE</td><td><span class="b block">待機中</span></td><td>A-4</td><td>コンテンツ</td></tr>
+      <tr data-s="着手可能" data-c="公開後設定"><td class="idcell">B-10</td><td><span class="nm">ページ表示速度の確認</span><div class="nt">PageSpeed Insights等（No.128）</div></td><td class="owner">ITLINE</td><td><span class="b ready">着手可能</span></td><td>—</td><td>公開後設定</td></tr>
+      <tr data-s="着手可能" data-c="公開後設定"><td class="idcell">B-11</td><td><span class="nm">依頼管理（講演・執筆依頼）の履歴動作確認</span><div class="nt">No.29</div></td><td class="owner">ITLINE</td><td><span class="b ready">着手可能</span></td><td>—</td><td>公開後設定</td></tr>
+      <tr data-s="着手可能" data-c="公開後設定"><td class="idcell">B-12</td><td><span class="nm">7/3議事録 実装済み項目の最終反映確認</span><div class="nt">No.119</div></td><td class="owner">ITLINE</td><td><span class="b ready">着手可能</span></td><td>—</td><td>公開後設定</td></tr>
+      <tr data-s="着手可能" data-c="マニュアル"><td class="idcell">B-13</td><td><span class="nm">操作マニュアルの作成</span><div class="nt">No.139。承認制の運用ルール（レビュー待ち→事務局公開）も明記予定</div></td><td class="owner">ITLINE</td><td><span class="b ready">着手可能</span></td><td>—</td><td>マニュアル</td></tr>
+      <!-- 対応不可 -->
+      <tr data-s="対応不可" data-c="会員機能" class="r-ng"><td class="idcell">C-1</td><td><span class="nm">フェロー記事の承認制ワークフロー</span><div class="nt">検証の結果、現行構成では対応不可（No.44・ご報告済み）。運用ルール＝「レビュー待ち」保存→事務局が公開、でカバー</div></td><td class="owner">—</td><td><span class="b ng">対応不可</span></td><td>—</td><td>会員機能</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="note">
+    本ダッシュボードは、公開前テスト項目書（全135項目・★確認結果）、2026年8月4日ご提出の残タスク一覧、および7月末までの対応実績に基づいて作成しています。<br>
+    ステータスの変更・タスクの追加は株式会社ITLINEまでご連絡ください。更新のうえ再共有いたします。
+  </div>
+</div>
+
+<script>
+(function(){
+  const rows=[...document.querySelectorAll('#tbl tbody tr')];
+  const fO=document.getElementById('fOwner'),fS=document.getElementById('fStatus'),fC=document.getElementById('fCat'),fT=document.getElementById('fText'),cnt=document.getElementById('cnt');
+  function apply(){
+    const o=fO.value,s=fS.value,c=fC.value,t=fT.value.trim().toLowerCase();
+    let shown=0;
+    rows.forEach(r=>{
+      const owner=r.querySelector('.owner').textContent;
+      const ok=(!o||owner.includes(o))&&(!s||r.dataset.s===s)&&(!c||r.dataset.c===c)&&(!t||r.textContent.toLowerCase().includes(t));
+      r.style.display=ok?'':'none';
+      if(ok)shown++;
+    });
+    cnt.textContent=shown+' / '+rows.length+' 件';
+  }
+  [fO,fS,fC].forEach(e=>e.addEventListener('change',apply));
+  fT.addEventListener('input',apply);
+  apply();
+})();
+</script>
+</body>
+</html>
