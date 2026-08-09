@@ -28,7 +28,9 @@ h1{font-size:30px;font-weight:700;margin:4px 0 6px}
 h2{font-size:20px;font-weight:700;margin:56px 0 6px}
 .lede{color:var(--sub);font-size:13.5px;margin-bottom:18px}
 /* KPI cards */
-.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(196px,1fr));gap:14px;margin-top:26px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin-top:26px}
+.kpi.next{border-color:#B9CCE4;background:#F4F8FD}
+.kpi.next .lbl,.kpi.next .num{color:var(--navy)}
 .kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
 .kpi .lbl{font-size:12.5px;font-weight:700;color:var(--sub);letter-spacing:.02em}
 .kpi .num{font-size:27px;font-weight:700;margin:2px 0}
@@ -63,6 +65,19 @@ h2{font-size:20px;font-weight:700;margin:56px 0 6px}
 .b.ng{background:var(--ng-bg);color:var(--ng)}
 .b.decide{background:var(--decide-bg);color:var(--decide)}
 .b.ready{background:#DEEAFB;color:#2C5C96}
+/* delivery phases */
+.tl-item.pay::before{background:#fff;border:3px solid var(--navy)}
+.tl-item.pay .tl-title{color:var(--navy);font-weight:700}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
+.panel.ph{position:relative;border-color:#C6D5E6}
+.ph-no{display:inline-block;background:var(--navy);color:#fff;font-size:11.5px;font-weight:700;letter-spacing:.1em;border-radius:99px;padding:2px 12px;margin-bottom:8px}
+.ph-no2{background:#5C7085}
+.panel.ph h3{font-size:16px;margin-bottom:8px}
+.ph-body{font-size:13px;color:var(--sub);line-height:1.75;margin-bottom:12px;min-height:60px}
+.ph-row{display:flex;justify-content:space-between;gap:12px;align-items:baseline;font-size:13px;border-top:1px solid #EDF2F7;padding:8px 0 0;margin-top:4px}
+.ph-row span{color:var(--sub);flex-shrink:0}
+.ph-row b{text-align:right}
+.callout{background:#EEF4FB;border-left:3px solid var(--navy);border-radius:0 8px 8px 0;padding:11px 16px;font-size:13px;margin-top:14px;color:#2E4763}
 /* progress section */
 .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
 .panel{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 20px}
@@ -110,6 +125,11 @@ td .nt{font-size:12px;color:var(--sub);margin-top:2px}
       <div class="num">7月末</div>
       <div class="sub">publicagenda.jp にて公開中</div>
     </div>
+    <div class="kpi next">
+      <div class="lbl">▶ 次のマイルストーン</div>
+      <div class="num">8/31 <span style="font-size:15px">第1回納品・検収</span></div>
+      <div class="sub">ご入金は検収月の翌月末（9月末）<br>残分はご提供4点の受領後に納品</div>
+    </div>
     <div class="kpi">
       <div class="lbl">公開前テスト（全135項目）</div>
       <div class="num">119 <span style="font-size:15px">OK（88%）</span></div>
@@ -135,7 +155,7 @@ td .nt{font-size:12px;color:var(--sub);margin-top:2px}
 
   <!-- Schedule -->
   <h2>スケジュール</h2>
-  <div class="lede">4月キックオフ→7月末本番公開まで完了。現在は本公開（検収）に向けた仕上げフェーズです。</div>
+  <div class="lede">4月キックオフ→7月末本番公開まで完了。ご提供情報が前提となる作業があるため、<b>8月末の第1回納品</b>と<b>ご提供後の第2回納品</b>の2段階で進めます。</div>
   <div class="tl">
     <div class="tl-month">2026年4月</div>
     <div class="tl-item done"><span class="tl-date">04/01</span>
@@ -176,19 +196,58 @@ td .nt{font-size:12px;color:var(--sub);margin-top:2px}
     <div class="tl-item today"><span class="tl-date">TODAY</span>
       <div class="tl-title"><span class="today-pill">本日　2026年8月8日</span></div>
     </div>
-    <div class="tl-item next"><span class="tl-date">ご提供後</span>
-      <div class="tl-title">ご提供4点の受領 → メール設定一式・法務ページ反映・GA設置</div>
-      <div class="tl-sub"><span class="b cat">仕上げ</span><span class="b wait">ご提供待ち</span>グラビス様→ITLINE</div>
+    <div class="tl-item next"><span class="tl-date">08/25-31</span>
+      <div class="tl-title">公開後設定（Search Console・パスワード変更・テストアカウント整理 等）／操作マニュアル作成</div>
+      <div class="tl-sub"><span class="b cat">仕上げ</span><span class="b ready">着手可能</span>ITLINE</div>
     </div>
-    <div class="tl-item next"><span class="tl-date">その後</span>
-      <div class="tl-title">公開後設定（Search Console・パスワード変更・テストアカウント整理 等）→ 操作マニュアル納品</div>
-      <div class="tl-sub"><span class="b cat">仕上げ</span><span class="b block">未着手</span>ITLINE</div>
+    <div class="tl-item pay"><span class="tl-date">08/31</span>
+      <div class="tl-title">■ 第1回 納品（一部納品）・検収</div>
+      <div class="tl-sub"><span class="b cat">納品・検収</span><span class="b block">予定</span>ご提供情報を必要としない範囲</div>
     </div>
-    <div class="tl-item next"><span class="tl-date">完了時</span>
-      <div class="tl-title">残作業完了 → 検収</div>
-      <div class="tl-sub"><span class="b cat">検収</span><span class="b block">予定</span>全員</div>
+    <div class="tl-month">2026年9月</div>
+    <div class="tl-item pay"><span class="tl-date">09/30</span>
+      <div class="tl-title">■ 第1回 ご入金（検収月の翌月末）</div>
+      <div class="tl-sub"><span class="b cat">ご入金</span><span class="b block">予定</span>8月検収分</div>
+    </div>
+    <div class="tl-month">ご提供後（時期未定）</div>
+    <div class="tl-item next"><span class="tl-date">受領後</span>
+      <div class="tl-title">ご提供4点の受領 → メール設定一式・法務ページ反映・アクセス解析設置</div>
+      <div class="tl-sub"><span class="b cat">残作業</span><span class="b wait">ご提供待ち</span>グラビス様 → ITLINE</div>
+    </div>
+    <div class="tl-item pay"><span class="tl-date">完了後</span>
+      <div class="tl-title">■ 第2回 納品（残分）・検収</div>
+      <div class="tl-sub"><span class="b cat">納品・検収</span><span class="b block">予定</span>上記残作業の完了をもって</div>
+    </div>
+    <div class="tl-item pay"><span class="tl-date">翌月末</span>
+      <div class="tl-title">■ 第2回 ご入金（検収月の翌月末）</div>
+      <div class="tl-sub"><span class="b cat">ご入金</span><span class="b block">予定</span>残分</div>
     </div>
   </div>
+
+  <!-- Delivery / acceptance -->
+  <h2>納品・検収・ご入金</h2>
+  <div class="lede">ご提供いただく情報が前提となる作業があるため、納品を2回に分けて進めます。ご入金はいずれも<b>検収月の翌月末</b>です。</div>
+  <div class="grid2">
+    <div class="panel ph">
+      <div class="ph-no">第 1 回</div>
+      <h3>一部納品（2026年8月末）</h3>
+      <div class="ph-body">
+        ご提供情報を必要としない範囲。サイト構築・デザイン・本番公開および公開後設定・操作マニュアルまで。
+      </div>
+      <div class="ph-row"><span>納品・検収</span><b>2026年8月31日（予定）</b></div>
+      <div class="ph-row"><span>ご入金</span><b>2026年9月30日（検収月の翌月末）</b></div>
+    </div>
+    <div class="panel ph">
+      <div class="ph-no ph-no2">第 2 回</div>
+      <h3>残分納品（ご提供後）</h3>
+      <div class="ph-body">
+        ご提供4点が前提となる作業。お問い合わせフォーム設置・メール設定一式、法務ページへの会社情報反映、アクセス解析タグ設置。
+      </div>
+      <div class="ph-row"><span>納品・検収</span><b>残作業の完了後（時期未定）</b></div>
+      <div class="ph-row"><span>ご入金</span><b>検収月の翌月末</b></div>
+    </div>
+  </div>
+  <div class="callout">第2回納品の時期は、<b>A-1〜A-4のご提供時期によって決まります</b>。ご提供後、速やかに着手いたします。</div>
 
   <!-- Progress -->
   <h2>進捗</h2>
@@ -272,6 +331,7 @@ td .nt{font-size:12px;color:var(--sub);margin-top:2px}
 
   <div class="note">
     本ダッシュボードは、公開前テスト項目書（全135項目・★確認結果）、2026年8月4日ご提出の残タスク一覧、および7月末までの対応実績に基づいて作成しています。<br>
+    納品・検収・ご入金の時期は現時点の予定です。第2回納品の時期はご提供4点の受領時期により変動いたします。<br>
     ステータスの変更・タスクの追加は株式会社ITLINEまでご連絡ください。更新のうえ再共有いたします。
   </div>
 </div>
