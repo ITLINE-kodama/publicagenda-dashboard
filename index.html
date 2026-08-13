@@ -143,8 +143,8 @@ td .nt{font-size:12px;color:var(--sub);margin-top:2px}
     </div>
     <div class="kpi">
       <div class="lbl">ITLINE 残作業</div>
-      <div class="num">15<span style="font-size:15px">件</span></div>
-      <div class="sub">着手可能 4件／公開後 7件／待機中 4件<br>公開後設定・マニュアルは第1回納品後</div>
+      <div class="num">14<span style="font-size:15px">件</span></div>
+      <div class="sub">着手可能 3件／公開後 7件／待機中 4件<br>メールアカウント作成は完了（8/12）</div>
     </div>
     <div class="kpi decide">
       <div class="lbl">ご決定・ご対応いただきたい事項</div>
@@ -197,6 +197,10 @@ td .nt{font-size:12px;color:var(--sub);margin-top:2px}
       <div class="tl-title">✓ メールアドレス構成の確定（弊社にてさくらサーバー上に4アドレスを作成）</div>
       <div class="tl-sub"><span class="b cat">メール</span><span class="b done">決定</span>これによりお問い合わせフォーム関連が着手可能に</div>
     </div>
+    <div class="tl-item done"><span class="tl-date">08/12</span>
+      <div class="tl-title">✓ メールアドレス4件の作成・送受信確認 完了</div>
+      <div class="tl-sub"><span class="b cat">メール</span><span class="b done">完了</span>SPF／DKIM／DMARC 設定済み。設定値は別紙にてご案内（第2回納品の範囲）</div>
+    </div>
     <div class="tl-item today"><span class="tl-date">TODAY</span>
       <div class="tl-title"><span class="today-pill">本日　2026年8月12日</span></div>
     </div>
@@ -211,16 +215,12 @@ td .nt{font-size:12px;color:var(--sub);margin-top:2px}
     </div>
     <div class="tl-month">第1回納品後（＝第2回納品に向けた残分の作業）</div>
     <div class="tl-item next"><span class="tl-date">順次</span>
-      <div class="tl-title">メールアカウント作成（info／fellow／admin／no-reply）</div>
-      <div class="tl-sub"><span class="b cat">メール</span><span class="b ready">着手可能</span>ITLINE</div>
-    </div>
-    <div class="tl-item next"><span class="tl-date">その後</span>
       <div class="tl-title">お問い合わせフォーム設置 → 受信・自動返信テスト → スパム対策</div>
       <div class="tl-sub"><span class="b cat">メール・フォーム</span><span class="b ready">着手可能</span>ITLINE</div>
     </div>
-    <div class="tl-item next"><span class="tl-date">作成後</span>
-      <div class="tl-title">admin@publicagenda.jp の Gmail 設定</div>
-      <div class="tl-sub"><span class="b cat">メール</span><span class="b wait">ご対応待ち</span>グラビス様</div>
+    <div class="tl-item next"><span class="tl-date">ご対応</span>
+      <div class="tl-title">admin@publicagenda.jp の Gmail 連携設定</div>
+      <div class="tl-sub"><span class="b cat">メール</span><span class="b wait">ご対応待ち</span>グラビス様（設定値ご案内済み・着手可能）</div>
     </div>
     <div class="tl-item next"><span class="tl-date">受領後</span>
       <div class="tl-title">ご提供3点の受領 → 法務ページへの会社情報反映・アクセス解析タグ設置・画像alt属性設定</div>
@@ -272,15 +272,15 @@ td .nt{font-size:12px;color:var(--sub);margin-top:2px}
 
   <!-- Mail addresses -->
   <h2>メールアドレス構成</h2>
-  <div class="lede">お問い合わせ用のメールアドレスは、<b>弊社にてさくらインターネットのサーバー上に作成</b>いたします（2026年8月12日決定）。これにより、お問い合わせフォーム関連の作業はご提供をお待ちすることなく着手できます。</div>
+  <div class="lede"><b>2026年8月12日、4アドレスの作成が完了いたしました</b>（さくらインターネットのサーバー上／送受信の動作確認済み／SPF・DKIM・DMARC の送信ドメイン認証を設定済み）。メールソフトの設定値は、別紙「メールアドレス設定完了のご案内」にてご送付しております。</div>
   <div class="tblwrap">
   <table>
     <thead><tr><th>アドレス</th><th>用途</th><th>作成・運用</th></tr></thead>
     <tbody>
-      <tr><td><b>info@publicagenda.jp</b></td><td>総合窓口<div class="nt">お問い合わせフォームの送信先</div></td><td>ITLINE にて作成</td></tr>
-      <tr><td><b>fellow@publicagenda.jp</b></td><td>フェローとのやり取り</td><td>ITLINE にて作成</td></tr>
-      <tr><td><b>admin@publicagenda.jp</b></td><td>管理</td><td>ITLINE にて作成 →<br><b>グラビス様にて Gmail 設定（予定）</b></td></tr>
-      <tr><td><b>no-reply@publicagenda.jp</b></td><td>送信専用<div class="nt">返信を受け付けないお知らせメール</div></td><td>ITLINE にて作成<div class="nt">自動返信・通知メールの送信元</div></td></tr>
+      <tr><td><b>info@publicagenda.jp</b></td><td>総合窓口<div class="nt">お問い合わせフォームの送信先</div></td><td>✓ 作成完了</td></tr>
+      <tr><td><b>fellow@publicagenda.jp</b></td><td>フェローとのやり取り</td><td>✓ 作成完了</td></tr>
+      <tr><td><b>admin@publicagenda.jp</b></td><td>管理</td><td>✓ 作成完了 →<br><b>グラビス様にて Gmail 連携設定（ご対応待ち）</b></td></tr>
+      <tr><td><b>no-reply@publicagenda.jp</b></td><td>送信専用<div class="nt">返信を受け付けないお知らせメール</div></td><td>✓ 作成完了<div class="nt">自動返信・通知メールの送信元</div></td></tr>
     </tbody>
   </table>
   </div>
@@ -298,19 +298,19 @@ td .nt{font-size:12px;color:var(--sub);margin-top:2px}
     </div>
     <div class="panel">
       <h3>残タスク（担当別）</h3>
-      <div class="prow"><span class="nm">グラビス様</span><div class="pbar"><i style="width:25%;background:var(--wait)"></i></div><span class="ct">5件（ご提供3・ご決定1・ご設定1）</span></div>
-      <div class="prow"><span class="nm">ITLINE 着手可能</span><div class="pbar"><i style="width:20%;background:#2C5C96"></i></div><span class="ct">4件</span></div>
-      <div class="prow"><span class="nm">ITLINE 公開後</span><div class="pbar"><i style="width:35%;background:#7C93AC"></i></div><span class="ct">7件</span></div>
-      <div class="prow"><span class="nm">ITLINE 待機中</span><div class="pbar"><i style="width:20%;background:#9DB2C5"></i></div><span class="ct">4件</span></div>
+      <div class="prow"><span class="nm">グラビス様</span><div class="pbar"><i style="width:26%;background:var(--wait)"></i></div><span class="ct">5件（ご提供3・ご決定1・ご設定1）</span></div>
+      <div class="prow"><span class="nm">ITLINE 着手可能</span><div class="pbar"><i style="width:16%;background:#2C5C96"></i></div><span class="ct">3件</span></div>
+      <div class="prow"><span class="nm">ITLINE 公開後</span><div class="pbar"><i style="width:37%;background:#7C93AC"></i></div><span class="ct">7件</span></div>
+      <div class="prow"><span class="nm">ITLINE 待機中</span><div class="pbar"><i style="width:21%;background:#9DB2C5"></i></div><span class="ct">4件</span></div>
       <div style="font-size:12px;color:var(--sub);margin-top:10px">※ 「公開後」7件は一般公開（秋頃）の実施後に着手する項目です。待機中4件＝ご提供3点（A-2〜A-4）待ち3件＋公開のご判断待ち1件。</div>
     </div>
     <div class="panel">
-      <h3>カテゴリ別（残タスク20件）</h3>
-      <div class="prow"><span class="nm">メール・フォーム</span><div class="pbar"><i style="width:25%;background:var(--navy)"></i></div><span class="ct">5件</span></div>
-      <div class="prow"><span class="nm">法務ページ</span><div class="pbar"><i style="width:10%;background:var(--navy)"></i></div><span class="ct">2件</span></div>
-      <div class="prow"><span class="nm">アクセス解析</span><div class="pbar"><i style="width:10%;background:var(--navy)"></i></div><span class="ct">2件</span></div>
-      <div class="prow"><span class="nm">コンテンツ</span><div class="pbar"><i style="width:10%;background:var(--navy)"></i></div><span class="ct">2件</span></div>
-      <div class="prow"><span class="nm">公開後設定・マニュアル</span><div class="pbar"><i style="width:35%;background:var(--navy)"></i></div><span class="ct">7件</span></div>
+      <h3>カテゴリ別（残タスク19件）</h3>
+      <div class="prow"><span class="nm">メール・フォーム</span><div class="pbar"><i style="width:21%;background:var(--navy)"></i></div><span class="ct">4件</span></div>
+      <div class="prow"><span class="nm">法務ページ</span><div class="pbar"><i style="width:11%;background:var(--navy)"></i></div><span class="ct">2件</span></div>
+      <div class="prow"><span class="nm">アクセス解析</span><div class="pbar"><i style="width:11%;background:var(--navy)"></i></div><span class="ct">2件</span></div>
+      <div class="prow"><span class="nm">コンテンツ</span><div class="pbar"><i style="width:11%;background:var(--navy)"></i></div><span class="ct">2件</span></div>
+      <div class="prow"><span class="nm">公開後設定・マニュアル</span><div class="pbar"><i style="width:37%;background:var(--navy)"></i></div><span class="ct">7件</span></div>
       <div class="prow"><span class="nm">一般公開</span><div class="pbar"><i style="width:5%;background:var(--navy)"></i></div><span class="ct">1件</span></div>
       <div class="prow"><span class="nm">ACADEMY</span><div class="pbar"><i style="width:5%;background:var(--decide)"></i></div><span class="ct">1件</span></div>
     </div>
@@ -347,11 +347,11 @@ td .nt{font-size:12px;color:var(--sub);margin-top:2px}
       <tr data-s="ご提供待ち" data-c="アクセス解析"><td class="idcell">A-3</td><td><span class="nm">Googleアナリティクスのタグご提供</span><div class="nt">貴社アカウントで管理される場合</div></td><td class="owner">グラビス様</td><td><span class="b wait">ご提供待ち</span></td><td>—</td><td>アクセス解析</td></tr>
       <tr data-s="ご提供待ち" data-c="コンテンツ"><td class="idcell">A-4</td><td><span class="nm">本公開用の記事のご準備</span></td><td class="owner">グラビス様</td><td><span class="b wait">ご提供待ち</span></td><td>—</td><td>コンテンツ</td></tr>
       <tr data-s="ご決定待ち" data-c="ACADEMY"><td class="idcell">A-5</td><td><span class="nm">ACADEMYランク基準のご決定</span><div class="nt">視聴実績ベース（要件案）か現行ポイント制か。8/4 調査結果あり・表示文言修正はご決定後に実施</div></td><td class="owner">グラビス様</td><td><span class="b decide">ご決定待ち</span></td><td>—</td><td>ACADEMY</td></tr>
-      <tr data-s="ご対応待ち" data-c="メール・フォーム"><td class="idcell">A-6</td><td><span class="nm">admin@publicagenda.jp の Gmail 設定</span><div class="nt">弊社でのアカウント作成（B-14）後にご対応いただきます</div></td><td class="owner">グラビス様</td><td><span class="b wait">ご対応待ち</span></td><td>B-14</td><td>メール・フォーム</td></tr>
+      <tr data-s="ご対応待ち" data-c="メール・フォーム"><td class="idcell">A-6</td><td><span class="nm">admin@publicagenda.jp の Gmail 設定</span><div class="nt">弊社でのアカウント作成は完了済み（✓B-14）。設定値をご案内済みですので、ご対応をお願いいたします</div></td><td class="owner">グラビス様</td><td><span class="b wait">ご対応待ち</span></td><td>✓B-14</td><td>メール・フォーム</td></tr>
       <!-- ITLINE -->
-      <tr data-s="着手可能" data-c="メール・フォーム"><td class="idcell">B-1</td><td><span class="nm">お問い合わせフォームの設置</span><div class="nt">送信先は info@publicagenda.jp（テスト項目書 No.134）</div></td><td class="owner">ITLINE</td><td><span class="b ready">着手可能</span></td><td>B-14</td><td>メール・フォーム</td></tr>
-      <tr data-s="着手可能" data-c="メール・フォーム"><td class="idcell">B-2</td><td><span class="nm">メール受信テスト・自動返信設定</span><div class="nt">自動返信の送信元は no-reply@publicagenda.jp。迷惑メール振り分け確認含む（No.98・99）</div></td><td class="owner">ITLINE</td><td><span class="b ready">着手可能</span></td><td>B-14</td><td>メール・フォーム</td></tr>
-      <tr data-s="着手可能" data-c="メール・フォーム"><td class="idcell">B-3</td><td><span class="nm">スパム対策の設定</span><div class="nt">No.102</div></td><td class="owner">ITLINE</td><td><span class="b ready">着手可能</span></td><td>B-14</td><td>メール・フォーム</td></tr>
+      <tr data-s="着手可能" data-c="メール・フォーム"><td class="idcell">B-1</td><td><span class="nm">お問い合わせフォームの設置</span><div class="nt">送信先は info@publicagenda.jp（テスト項目書 No.134）</div></td><td class="owner">ITLINE</td><td><span class="b ready">着手可能</span></td><td>✓B-14</td><td>メール・フォーム</td></tr>
+      <tr data-s="着手可能" data-c="メール・フォーム"><td class="idcell">B-2</td><td><span class="nm">メール受信テスト・自動返信設定</span><div class="nt">自動返信の送信元は no-reply@publicagenda.jp。迷惑メール振り分け確認含む（No.98・99）</div></td><td class="owner">ITLINE</td><td><span class="b ready">着手可能</span></td><td>✓B-14</td><td>メール・フォーム</td></tr>
+      <tr data-s="着手可能" data-c="メール・フォーム"><td class="idcell">B-3</td><td><span class="nm">スパム対策の設定</span><div class="nt">No.102</div></td><td class="owner">ITLINE</td><td><span class="b ready">着手可能</span></td><td>✓B-14</td><td>メール・フォーム</td></tr>
       <tr data-s="待機中" data-c="法務ページ"><td class="idcell">B-4</td><td><span class="nm">利用規約・プライバシーポリシーへの会社情報反映</span><div class="nt">制定日・社名・住所・連絡先、運営者情報（No.105・130）</div></td><td class="owner">ITLINE</td><td><span class="b block">待機中</span></td><td>A-2</td><td>法務ページ</td></tr>
       <tr data-s="待機中" data-c="アクセス解析"><td class="idcell">B-5</td><td><span class="nm">アクセス解析タグ（GA4等）の設置</span><div class="nt">No.129</div></td><td class="owner">ITLINE</td><td><span class="b block">待機中</span></td><td>A-3</td><td>アクセス解析</td></tr>
       <tr data-s="公開後" data-c="公開後設定"><td class="idcell">B-6</td><td><span class="nm">sitemap.xml確認・Search Console登録</span><div class="nt">No.4</div></td><td class="owner">ITLINE</td><td><span class="b block">公開後</span></td><td>一般公開</td><td>公開後設定</td></tr>
@@ -362,7 +362,7 @@ td .nt{font-size:12px;color:var(--sub);margin-top:2px}
       <tr data-s="公開後" data-c="公開後設定"><td class="idcell">B-11</td><td><span class="nm">依頼管理（講演・執筆依頼）の履歴動作確認</span><div class="nt">No.29</div></td><td class="owner">ITLINE</td><td><span class="b block">公開後</span></td><td>一般公開</td><td>公開後設定</td></tr>
       <tr data-s="公開後" data-c="公開後設定"><td class="idcell">B-12</td><td><span class="nm">7/3議事録 実装済み項目の最終反映確認</span><div class="nt">No.119</div></td><td class="owner">ITLINE</td><td><span class="b block">公開後</span></td><td>一般公開</td><td>公開後設定</td></tr>
       <tr data-s="公開後" data-c="マニュアル"><td class="idcell">B-13</td><td><span class="nm">操作マニュアルの作成</span><div class="nt">No.139。承認制の運用ルール（レビュー待ち→事務局公開）も明記予定</div></td><td class="owner">ITLINE</td><td><span class="b block">公開後</span></td><td>一般公開</td><td>マニュアル</td></tr>
-      <tr data-s="着手可能" data-c="メール・フォーム"><td class="idcell">B-14</td><td><span class="nm">さくらサーバーでのメールアカウント作成（4アドレス）</span><div class="nt">info／fellow／admin／no-reply。★B-1〜B-3・A-6 の前提となる最初の作業</div></td><td class="owner">ITLINE</td><td><span class="b ready">着手可能</span></td><td>—</td><td>メール・フォーム</td></tr>
+      <tr data-s="完了" data-c="メール・フォーム"><td class="idcell k">✓B-14</td><td><span class="nm">さくらサーバーでのメールアカウント作成（4アドレス）</span><div class="nt">2026/8/12 完了。送受信の動作確認済み、SPF／DKIM／DMARC（送信ドメイン認証）設定済み。設定値は別途「メールアドレス設定完了のご案内」にてご送付</div></td><td class="owner">ITLINE</td><td><span class="b done">完了</span></td><td>—</td><td>メール・フォーム</td></tr>
       <tr data-s="待機中" data-c="公開・品質"><td class="idcell">B-15</td><td><span class="nm">一般公開の実施</span><div class="nt">検索エンジン向け設定の解除ほか最終確認を行い公開いたします。実施時期はグラビス様のご判断によります</div></td><td class="owner">ITLINE</td><td><span class="b block">ご判断待ち</span></td><td>公開のご判断</td><td>公開・品質</td></tr>
       <!-- 対応不可 -->
       <tr data-s="対応不可" data-c="会員機能" class="r-ng"><td class="idcell">C-1</td><td><span class="nm">フェロー記事の承認制ワークフロー</span><div class="nt">検証の結果、現行構成では対応不可（No.44・ご報告済み）。運用ルール＝「レビュー待ち」保存→事務局が公開、でカバー</div></td><td class="owner">—</td><td><span class="b ng">対応不可</span></td><td>—</td><td>会員機能</td></tr>
