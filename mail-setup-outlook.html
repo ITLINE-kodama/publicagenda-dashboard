@@ -11,7 +11,7 @@
 :root{
   --ink:#14263D; --sub:#5C7085; --line:#D9E2EC; --bg:#F7FAFC; --card:#FFFFFF;
   --navy:#0B2E59; --navy-deep:#071B3A;
-  --done:#1E7A46; --warn:#8A5E12; --warn-bg:#FBF0DC;
+  --ok:#1E7A46; --ok-bg:#E8F5EC;
   --ng:#C0271D; --ng-bg:#FBE9E7;
 }
 *{margin:0;padding:0;box-sizing:border-box}
@@ -25,27 +25,25 @@ h1{font-size:27px;font-weight:700;margin:4px 0 6px}
 .back:hover{text-decoration:underline}
 h2{font-size:19px;font-weight:700;margin:44px 0 8px;border-bottom:2px solid var(--navy);padding-bottom:6px}
 p{margin-bottom:12px}
-/* download */
 .dl{display:flex;flex-wrap:wrap;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:22px 0}
 .dl-txt{flex:1;min-width:220px;font-size:13px;color:var(--sub)}
 .dl-btn{display:inline-flex;align-items:center;gap:8px;background:var(--navy);color:#fff;text-decoration:none;font-weight:700;font-size:14px;border-radius:8px;padding:11px 20px;white-space:nowrap}
 .dl-btn:hover{background:#123f78}
 .print-btn{display:inline-flex;align-items:center;gap:6px;background:#fff;color:var(--navy);border:1px solid var(--navy);border-radius:8px;padding:10px 16px;font-weight:700;font-size:13.5px;cursor:pointer;font-family:inherit}
 .print-btn:hover{background:#EEF4FB}
-/* callouts */
 .box{border-radius:0 8px 8px 0;padding:13px 18px;font-size:13.5px;margin:16px 0;line-height:1.8}
 .box.info{background:#EEF4FB;border-left:4px solid var(--navy);color:#2E4763}
+.box.good{background:var(--ok-bg);border-left:4px solid var(--ok);color:#14532B}
 .box.alert{background:var(--ng-bg);border-left:4px solid var(--ng);color:#7A1C16}
 .box b{font-weight:700}
-/* tables */
 .tblwrap{overflow-x:auto;border-radius:10px;margin:14px 0}
 table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:13.5px}
 th{background:var(--navy-deep);color:#fff;font-size:12.5px;text-align:left;padding:10px 12px;font-weight:700;white-space:nowrap}
 td{padding:11px 12px;border-top:1px solid #EDF2F7;vertical-align:top}
 td.k{font-weight:700;white-space:nowrap;background:#F7F9FC}
 .mono{font-family:Consolas,"SF Mono",Menlo,monospace;font-weight:700;letter-spacing:.2px}
-.need{color:var(--ng);font-weight:700}
-/* steps */
+.yes{color:var(--ok);font-weight:700}
+.no{font-weight:700}
 .step{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-bottom:12px;display:flex;gap:14px}
 .step-no{flex-shrink:0;width:30px;height:30px;border-radius:50%;background:var(--navy);color:#fff;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center}
 .step-b{flex:1}
@@ -82,12 +80,12 @@ li{margin-bottom:5px;font-size:14px}
   <p>Windows パソコンの Outlook で publicagenda.jp のメールを送受信するための設定手順です。<b>IMAP方式</b>（メールをサーバー上で管理し、パソコン・スマートフォンなど複数の端末で同じ状態を共有できる方式）で設定いたします。</p>
 
   <div class="box info">
-    <b>【ご用意いただくもの】</b>別紙「メールアドレス設定完了のご案内」。ログインユーザー名とパスワードが記載されております。<b>本ページには記載しておりません</b>ので、お手元にご用意のうえ作業を進めてください。
+    <b>【ご用意いただくもの】</b>別紙「メールアドレス設定完了のご案内」に記載のパスワード。<b>本ページには記載しておりません</b>ので、お手元にご用意のうえ作業を進めてください。
   </div>
 
-  <div class="box alert">
-    <b>【最重要】「メールアドレス」と「ログインユーザー名」は別物です。</b><br>
-    メールアドレスは <span class="mono">info@publicagenda.jp</span> などの公開アドレス、ログインユーザー名は <span class="mono">pa-</span> で始まるサーバー認証専用のIDです。取り違えると認証に失敗しますので、必ず使い分けてください。
+  <div class="box good">
+    <b>【ポイント】ユーザー名は、メールアドレスをそのままご入力いただけます。</b><br>
+    （例：<span class="mono">info@publicagenda.jp</span>）別途IDをご用意いただく必要はありません。
   </div>
 
   <h2>1．設定値一覧</h2>
@@ -95,75 +93,62 @@ li{margin-bottom:5px;font-size:14px}
     <table>
       <thead><tr><th>区分</th><th>項目</th><th>設定値</th></tr></thead>
       <tbody>
-        <tr><td class="k" rowspan="3">受信メール<br>（IMAP）</td><td>サーバー名</td><td class="mono">glavis.sakura.ne.jp</td></tr>
+        <tr><td class="k" rowspan="4">受信メール<br>（IMAP）</td><td>サーバー</td><td class="mono">glavis.sakura.ne.jp</td></tr>
         <tr><td>ポート</td><td class="mono">993</td></tr>
-        <tr><td>暗号化</td><td class="mono">SSL/TLS</td></tr>
-        <tr><td class="k" rowspan="4">送信メール<br>（SMTP）</td><td>サーバー名</td><td class="mono">glavis.sakura.ne.jp</td></tr>
+        <tr><td>暗号化方法</td><td class="mono">SSL/TLS</td></tr>
+        <tr><td>セキュリティで保護されたパスワード認証 (SPA)</td><td class="no">チェックしない</td></tr>
+        <tr><td class="k" rowspan="6">送信メール<br>（SMTP）</td><td>サーバー</td><td class="mono">glavis.sakura.ne.jp</td></tr>
         <tr><td>ポート</td><td class="mono">587</td></tr>
-        <tr><td>暗号化</td><td class="mono">STARTTLS</td></tr>
-        <tr><td>認証</td><td>必要（受信と同じユーザー名・パスワード）</td></tr>
+        <tr><td>暗号化方法</td><td class="mono">STARTTLS</td></tr>
+        <tr><td>セキュリティで保護されたパスワード認証 (SPA)</td><td class="no">チェックしない</td></tr>
+        <tr><td>送信 (SMTP) サーバーには認証が必要です</td><td class="yes">チェックする</td></tr>
+        <tr><td>　└ 受信メール サーバーと同じ設定を使用する</td><td class="yes">こちらを選択</td></tr>
+        <tr><td class="k" rowspan="2">共通</td><td>ユーザー名</td><td>メールアドレスと同じ</td></tr>
+        <tr><td>パスワード</td><td>別紙をご覧ください</td></tr>
       </tbody>
     </table>
   </div>
-  <p style="font-size:13px;color:var(--sub)">※ ユーザー名・パスワードは別紙をご覧ください。</p>
 
   <h2>2．設定手順</h2>
-  <p style="font-size:13.5px;color:#3E5570">Outlook の画面から追加する方法では、ユーザー名をメールアドレスと別に指定できない場合があります。確実に設定できる「コントロールパネル」からの手順をご案内いたします。</p>
+  <p style="font-size:13.5px;color:#3E5570">Outlook を起動した状態から、6ステップで設定できます。</p>
 
   <div class="step"><div class="step-no">1</div><div class="step-b">
-    <div class="step-t">コントロールパネルを開く</div>
-    <p class="step-d">スタートボタン横の検索欄に「コントロールパネル」と入力して開きます。右上の<kbd>表示方法</kbd>を「小さいアイコン」に変更し、<kbd>Mail (Microsoft Outlook)</kbd>をクリックします。</p>
+    <div class="step-t">アカウント設定を開く</div>
+    <p class="step-d">Outlook の<kbd>ファイル</kbd>タブ →<kbd>情報</kbd>→<kbd>アカウント設定</kbd>→ メニューの<kbd>アカウント設定 (A)…</kbd>を選びます。「電子メール アカウント」の画面が開きますので、<kbd>メール</kbd>タブの<kbd>新規 (N)…</kbd>をクリックします。</p>
   </div></div>
 
   <div class="step"><div class="step-no">2</div><div class="step-b">
-    <div class="step-t">電子メールアカウントを新規追加</div>
-    <p class="step-d"><kbd>電子メール アカウント</kbd>→<kbd>新規</kbd>の順にクリックします。</p>
+    <div class="step-t">メールアドレスを入力して手動設定を選ぶ</div>
+    <p class="step-d"><kbd>メール アドレス</kbd>に設定したいアドレス（例：<span class="mono">info@publicagenda.jp</span>）を入力します。次に<kbd>詳細オプション</kbd>をクリックし、<b>「自分で自分のアカウントを手動で設定」にチェック</b>を入れて<kbd>接続</kbd>をクリックします。</p>
   </div></div>
 
   <div class="step"><div class="step-no">3</div><div class="step-b">
-    <div class="step-t">手動設定を選ぶ</div>
-    <p class="step-d"><kbd>自分で電子メールやその他のサービスを使うための設定をする (手動設定)</kbd>を選び、<kbd>次へ</kbd>→<kbd>POP または IMAP</kbd>→<kbd>次へ</kbd>と進みます。</p>
+    <div class="step-t">アカウントの種類で IMAP を選ぶ</div>
+    <p class="step-d">「詳細設定」の画面で、封筒アイコンの<kbd>IMAP</kbd>をクリックします。</p>
   </div></div>
 
   <div class="step"><div class="step-no">4</div><div class="step-b">
-    <div class="step-t">各項目を入力する</div>
-    <p class="step-d">下表のとおり入力します。<span class="need">★印の2項目</span>は別紙をご覧ください。</p>
-    <div class="tblwrap">
-      <table>
-        <thead><tr><th>入力欄</th><th>入力する内容</th></tr></thead>
-        <tbody>
-          <tr><td class="k">名前</td><td>差出人として相手に表示される名前（例：Public AGENDA 事務局）</td></tr>
-          <tr><td class="k">電子メールアドレス</td><td>公開アドレス（例：<span class="mono">info@publicagenda.jp</span>）</td></tr>
-          <tr><td class="k">アカウントの種類</td><td class="mono">IMAP</td></tr>
-          <tr><td class="k">受信メールサーバー</td><td class="mono">glavis.sakura.ne.jp</td></tr>
-          <tr><td class="k">送信メールサーバー</td><td class="mono">glavis.sakura.ne.jp</td></tr>
-          <tr><td class="k">アカウント名<br>（ユーザー名）</td><td class="need">★別紙記載のログインユーザー名（pa- で始まるもの）</td></tr>
-          <tr><td class="k">パスワード</td><td class="need">★別紙記載のパスワード</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <div class="step-t">サーバー情報を入力する</div>
+    <p class="step-d">「IMAP アカウントの設定」画面で、上記1章の設定値を入力します。受信メールは <span class="mono">993 / SSL/TLS</span>、送信メールは <span class="mono">587 / STARTTLS</span> です。<b>［セキュリティで保護されたパスワード認証 (SPA)］は受信・送信ともチェックしません。</b>入力後<kbd>次へ</kbd>をクリックします。</p>
   </div></div>
 
   <div class="step"><div class="step-no">5</div><div class="step-b">
-    <div class="step-t">送信サーバーの認証を有効にする</div>
-    <p class="step-d"><kbd>詳細設定</kbd>ボタン →<kbd>送信サーバー</kbd>タブを開き、「送信サーバー (SMTP) は認証が必要」に<b>チェックを入れ</b>、「受信メール サーバーと同じ設定を使用する」を選びます。</p>
+    <div class="step-t">パスワードを入力する</div>
+    <p class="step-d">別紙記載のパスワードを入力し、<kbd>接続</kbd>をクリックします。<b>「アカウントが正常に追加されました」</b>と表示されれば成功です。<kbd>完了</kbd>をクリックします。</p>
   </div></div>
 
   <div class="step"><div class="step-no">6</div><div class="step-b">
-    <div class="step-t">ポートと暗号化を設定する</div>
-    <p class="step-d">同じ画面の<kbd>詳細設定</kbd>タブで、受信サーバー (IMAP) を <span class="mono">993 / SSL/TLS</span>、送信サーバー (SMTP) を <span class="mono">587 / STARTTLS</span> に設定し、<kbd>OK</kbd>をクリックします。</p>
+    <div class="step-t">送信サーバーの認証を確認する</div>
+    <p class="step-d"><kbd>ファイル</kbd>→<kbd>情報</kbd>→<kbd>アカウント設定</kbd>→<kbd>サーバーの設定</kbd>を開き、<kbd>送信メール</kbd>の項目を展開します。<b>［送信 (SMTP) サーバーには認証が必要です］にチェック</b>が入り、<b>［受信メール サーバーと同じ設定を使用する］</b>が選ばれていることを確認して<kbd>次へ</kbd>→<kbd>完了</kbd>で保存します。</p>
   </div></div>
 
-  <div class="step"><div class="step-no">7</div><div class="step-b">
-    <div class="step-t">テストして完了</div>
-    <p class="step-d"><kbd>次へ</kbd>をクリックすると接続テストが実行されます。受信・送信の両方に緑のチェックが付けば成功です。<kbd>閉じる</kbd>→<kbd>完了</kbd>で設定は終了です。</p>
-  </div></div>
+  <div class="box info">この6番目の確認を行わないと、<b>受信はできるのに送信だけできない</b>状態になることがあります。必ずご確認ください。</div>
 
   <h2>3．設定後の確認</h2>
   <ul>
     <li>ご自身の別のメールアドレス（携帯電話や Gmail など）宛にテスト送信し、届くことをご確認ください。</li>
     <li>そのメールに返信し、Outlook で受信できることをご確認ください。</li>
-    <li>差出人の表示が公開アドレス（<span class="mono">info@publicagenda.jp</span> 等）になっていることをご確認ください。</li>
+    <li>差出人の表示が、設定したアドレス（<span class="mono">info@publicagenda.jp</span> 等）になっていることをご確認ください。</li>
   </ul>
 
   <h2>4．うまくいかないとき</h2>
@@ -171,25 +156,26 @@ li{margin-bottom:5px;font-size:14px}
     <table>
       <thead><tr><th>症状</th><th>ご確認いただく点</th></tr></thead>
       <tbody>
-        <tr><td class="k">パスワードを何度も聞かれる</td><td>「アカウント名」に公開アドレスを入れている可能性があります。別紙のログインユーザー名（<span class="mono">pa-</span> で始まるもの）に直してください。</td></tr>
-        <tr><td class="k">受信はできるが送信できない</td><td><kbd>送信サーバー</kbd>タブの「送信サーバー (SMTP) は認証が必要」にチェックが入っているかご確認ください。</td></tr>
-        <tr><td class="k">サーバーに接続できない</td><td>ポート（受信 <span class="mono">993</span>／送信 <span class="mono">587</span>）と暗号化の種類（SSL/TLS／STARTTLS）をご確認ください。</td></tr>
-        <tr><td class="k">差出人が pa- … で表示される</td><td>「電子メールアドレス」欄に公開アドレスが入っているかご確認ください。</td></tr>
+        <tr><td class="k">パスワードを何度も聞かれる</td><td>まず別紙のパスワードを再度ご確認ください。それでも通らない場合は、パスワード入力画面の右上<kbd>別のユーザー</kbd>から、別紙記載のログインユーザー名（<span class="mono">pa-</span> で始まるもの）をお試しください。</td></tr>
+        <tr><td class="k">受信はできるが送信できない</td><td>［送信 (SMTP) サーバーには認証が必要です］にチェックが入っているか、［受信メール サーバーと同じ設定を使用する］が選ばれているかご確認ください。</td></tr>
+        <tr><td class="k">サーバーに接続できない</td><td>ポート（受信 <span class="mono">993</span>／送信 <span class="mono">587</span>）と暗号化方法（SSL/TLS／STARTTLS）をご確認ください。</td></tr>
+        <tr><td class="k">設定できたのに動作が不安定</td><td>［セキュリティで保護されたパスワード認証 (SPA)］にチェックが入っていないかご確認ください。<b>受信・送信とも不要</b>です。</td></tr>
       </tbody>
     </table>
   </div>
 
   <h2>5．補足</h2>
   <ul>
-    <li><b>「新しい Outlook」をご利用の場合</b>：アカウント追加画面で <kbd>IMAP</kbd> を選び、本ページ1章の設定値をご入力ください。ユーザー名欄には別紙のログインユーザー名をご入力ください。</li>
+    <li><b>複数のアドレスを設定する場合</b>：STEP 1 の<kbd>新規 (N)…</kbd>から、同じ手順を繰り返してください。</li>
+    <li><b>「新しい Outlook」をご利用の場合</b>：アカウント追加画面で <kbd>IMAP</kbd> を選び、上記1章の設定値をご入力ください。</li>
     <li><b>スマートフォンの場合</b>：標準メールアプリで「その他」→「IMAP」を選び、同じ設定値をご入力ください。</li>
     <li><span class="mono">no-reply@publicagenda.jp</span> は送信専用のため、通常はメールソフトへの設定は不要です。</li>
-    <li><span class="mono">admin@publicagenda.jp</span> を Gmail で受信される場合は、Gmail の<kbd>設定</kbd>→<kbd>アカウントとインポート</kbd>から本ページ1章の設定値をご登録ください。</li>
+    <li><span class="mono">admin@publicagenda.jp</span> を Gmail で受信される場合は、Gmail の<kbd>設定</kbd>→<kbd>アカウントとインポート</kbd>から上記1章の設定値をご登録ください。</li>
   </ul>
 
   <div class="note">
     ご不明な点は株式会社ITLINEまでお問い合わせください。<br>
-    本ページには認証情報（ユーザー名・パスワード）は記載しておりません。別紙「メールアドレス設定完了のご案内」とあわせてご利用ください。
+    本ページには認証情報（パスワード）は記載しておりません。別紙「メールアドレス設定完了のご案内」とあわせてご利用ください。
   </div>
 </div>
 </body>
