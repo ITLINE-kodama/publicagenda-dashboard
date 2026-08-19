@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet">
+<title>Outlook メール設定マニュアル（IMAP）｜公共の論点</title>
+<style>
+:root{
+  --ink:#14263D; --sub:#5C7085; --line:#D9E2EC; --bg:#F7FAFC; --card:#FFFFFF;
+  --navy:#0B2E59; --navy-deep:#071B3A;
+  --done:#1E7A46; --warn:#8A5E12; --warn-bg:#FBF0DC;
+  --ng:#C0271D; --ng-bg:#FBE9E7;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Hiragino Kaku Gothic ProN","Yu Gothic Medium","Yu Gothic",Meiryo,sans-serif;font-size:15px;color:var(--ink);background:var(--bg);line-height:1.7;-webkit-font-smoothing:antialiased}
+.wrap{max-width:900px;margin:0 auto;padding:36px 24px 80px}
+.eyebrow{font-size:12.5px;font-weight:700;letter-spacing:.14em;color:var(--navy)}
+h1{font-size:27px;font-weight:700;margin:4px 0 6px}
+.meta{color:var(--sub);font-size:13px}
+.head{border-bottom:3px solid var(--navy);padding-bottom:14px;margin-bottom:8px}
+.back{display:inline-block;font-size:13px;color:var(--navy);text-decoration:none;margin-bottom:14px}
+.back:hover{text-decoration:underline}
+h2{font-size:19px;font-weight:700;margin:44px 0 8px;border-bottom:2px solid var(--navy);padding-bottom:6px}
+p{margin-bottom:12px}
+/* download */
+.dl{display:flex;flex-wrap:wrap;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:22px 0}
+.dl-txt{flex:1;min-width:220px;font-size:13px;color:var(--sub)}
+.dl-btn{display:inline-flex;align-items:center;gap:8px;background:var(--navy);color:#fff;text-decoration:none;font-weight:700;font-size:14px;border-radius:8px;padding:11px 20px;white-space:nowrap}
+.dl-btn:hover{background:#123f78}
+.print-btn{display:inline-flex;align-items:center;gap:6px;background:#fff;color:var(--navy);border:1px solid var(--navy);border-radius:8px;padding:10px 16px;font-weight:700;font-size:13.5px;cursor:pointer;font-family:inherit}
+.print-btn:hover{background:#EEF4FB}
+/* callouts */
+.box{border-radius:0 8px 8px 0;padding:13px 18px;font-size:13.5px;margin:16px 0;line-height:1.8}
+.box.info{background:#EEF4FB;border-left:4px solid var(--navy);color:#2E4763}
+.box.alert{background:var(--ng-bg);border-left:4px solid var(--ng);color:#7A1C16}
+.box b{font-weight:700}
+/* tables */
+.tblwrap{overflow-x:auto;border-radius:10px;margin:14px 0}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:13.5px}
+th{background:var(--navy-deep);color:#fff;font-size:12.5px;text-align:left;padding:10px 12px;font-weight:700;white-space:nowrap}
+td{padding:11px 12px;border-top:1px solid #EDF2F7;vertical-align:top}
+td.k{font-weight:700;white-space:nowrap;background:#F7F9FC}
+.mono{font-family:Consolas,"SF Mono",Menlo,monospace;font-weight:700;letter-spacing:.2px}
+.need{color:var(--ng);font-weight:700}
+/* steps */
+.step{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-bottom:12px;display:flex;gap:14px}
+.step-no{flex-shrink:0;width:30px;height:30px;border-radius:50%;background:var(--navy);color:#fff;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center}
+.step-b{flex:1}
+.step-t{font-weight:700;font-size:15px;margin-bottom:4px}
+.step-d{font-size:13.5px;color:#3E5570;margin:0}
+kbd{background:#EDF2F7;border:1px solid #CBD6E2;border-bottom-width:2px;border-radius:4px;padding:1px 6px;font-family:inherit;font-size:12.5px;font-weight:700;white-space:nowrap}
+ul{margin:0 0 12px 20px}
+li{margin-bottom:5px;font-size:14px}
+.note{background:#EDF2F7;border-radius:8px;padding:12px 16px;font-size:12.5px;color:#3E5570;margin-top:36px;line-height:1.8}
+@media print{
+  body{background:#fff} .wrap{padding:0;max-width:none}
+  .dl,.back,.print-btn{display:none!important}
+  .step,table,.box{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back" href="./">← 進捗ダッシュボードへ戻る</a>
+
+  <div class="head">
+    <div class="eyebrow">PUBLIC AGENDA / MAIL SETUP</div>
+    <h1>Outlook メール設定マニュアル（IMAP）</h1>
+    <div class="meta">publicagenda.jp　／　作成：株式会社ITLINE　2026年8月19日</div>
+  </div>
+
+  <div class="dl">
+    <div class="dl-txt">印刷・配布用のPDFをご用意しております。設定作業をされる担当者様へそのままお渡しいただけます。</div>
+    <a class="dl-btn" href="./publicagenda-outlook-imap-setup.pdf" download>⤓　PDFをダウンロード</a>
+    <button class="print-btn" onclick="window.print()">🖨 このページを印刷</button>
+  </div>
+
+  <p>Windows パソコンの Outlook で publicagenda.jp のメールを送受信するための設定手順です。<b>IMAP方式</b>（メールをサーバー上で管理し、パソコン・スマートフォンなど複数の端末で同じ状態を共有できる方式）で設定いたします。</p>
+
+  <div class="box info">
+    <b>【ご用意いただくもの】</b>別紙「メールアドレス設定完了のご案内」。ログインユーザー名とパスワードが記載されております。<b>本ページには記載しておりません</b>ので、お手元にご用意のうえ作業を進めてください。
+  </div>
+
+  <div class="box alert">
+    <b>【最重要】「メールアドレス」と「ログインユーザー名」は別物です。</b><br>
+    メールアドレスは <span class="mono">info@publicagenda.jp</span> などの公開アドレス、ログインユーザー名は <span class="mono">pa-</span> で始まるサーバー認証専用のIDです。取り違えると認証に失敗しますので、必ず使い分けてください。
+  </div>
+
+  <h2>1．設定値一覧</h2>
+  <div class="tblwrap">
+    <table>
+      <thead><tr><th>区分</th><th>項目</th><th>設定値</th></tr></thead>
+      <tbody>
+        <tr><td class="k" rowspan="3">受信メール<br>（IMAP）</td><td>サーバー名</td><td class="mono">glavis.sakura.ne.jp</td></tr>
+        <tr><td>ポート</td><td class="mono">993</td></tr>
+        <tr><td>暗号化</td><td class="mono">SSL/TLS</td></tr>
+        <tr><td class="k" rowspan="4">送信メール<br>（SMTP）</td><td>サーバー名</td><td class="mono">glavis.sakura.ne.jp</td></tr>
+        <tr><td>ポート</td><td class="mono">587</td></tr>
+        <tr><td>暗号化</td><td class="mono">STARTTLS</td></tr>
+        <tr><td>認証</td><td>必要（受信と同じユーザー名・パスワード）</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:13px;color:var(--sub)">※ ユーザー名・パスワードは別紙をご覧ください。</p>
+
+  <h2>2．設定手順</h2>
+  <p style="font-size:13.5px;color:#3E5570">Outlook の画面から追加する方法では、ユーザー名をメールアドレスと別に指定できない場合があります。確実に設定できる「コントロールパネル」からの手順をご案内いたします。</p>
+
+  <div class="step"><div class="step-no">1</div><div class="step-b">
+    <div class="step-t">コントロールパネルを開く</div>
+    <p class="step-d">スタートボタン横の検索欄に「コントロールパネル」と入力して開きます。右上の<kbd>表示方法</kbd>を「小さいアイコン」に変更し、<kbd>Mail (Microsoft Outlook)</kbd>をクリックします。</p>
+  </div></div>
+
+  <div class="step"><div class="step-no">2</div><div class="step-b">
+    <div class="step-t">電子メールアカウントを新規追加</div>
+    <p class="step-d"><kbd>電子メール アカウント</kbd>→<kbd>新規</kbd>の順にクリックします。</p>
+  </div></div>
+
+  <div class="step"><div class="step-no">3</div><div class="step-b">
+    <div class="step-t">手動設定を選ぶ</div>
+    <p class="step-d"><kbd>自分で電子メールやその他のサービスを使うための設定をする (手動設定)</kbd>を選び、<kbd>次へ</kbd>→<kbd>POP または IMAP</kbd>→<kbd>次へ</kbd>と進みます。</p>
+  </div></div>
+
+  <div class="step"><div class="step-no">4</div><div class="step-b">
+    <div class="step-t">各項目を入力する</div>
+    <p class="step-d">下表のとおり入力します。<span class="need">★印の2項目</span>は別紙をご覧ください。</p>
+    <div class="tblwrap">
+      <table>
+        <thead><tr><th>入力欄</th><th>入力する内容</th></tr></thead>
+        <tbody>
+          <tr><td class="k">名前</td><td>差出人として相手に表示される名前（例：Public AGENDA 事務局）</td></tr>
+          <tr><td class="k">電子メールアドレス</td><td>公開アドレス（例：<span class="mono">info@publicagenda.jp</span>）</td></tr>
+          <tr><td class="k">アカウントの種類</td><td class="mono">IMAP</td></tr>
+          <tr><td class="k">受信メールサーバー</td><td class="mono">glavis.sakura.ne.jp</td></tr>
+          <tr><td class="k">送信メールサーバー</td><td class="mono">glavis.sakura.ne.jp</td></tr>
+          <tr><td class="k">アカウント名<br>（ユーザー名）</td><td class="need">★別紙記載のログインユーザー名（pa- で始まるもの）</td></tr>
+          <tr><td class="k">パスワード</td><td class="need">★別紙記載のパスワード</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div></div>
+
+  <div class="step"><div class="step-no">5</div><div class="step-b">
+    <div class="step-t">送信サーバーの認証を有効にする</div>
+    <p class="step-d"><kbd>詳細設定</kbd>ボタン →<kbd>送信サーバー</kbd>タブを開き、「送信サーバー (SMTP) は認証が必要」に<b>チェックを入れ</b>、「受信メール サーバーと同じ設定を使用する」を選びます。</p>
+  </div></div>
+
+  <div class="step"><div class="step-no">6</div><div class="step-b">
+    <div class="step-t">ポートと暗号化を設定する</div>
+    <p class="step-d">同じ画面の<kbd>詳細設定</kbd>タブで、受信サーバー (IMAP) を <span class="mono">993 / SSL/TLS</span>、送信サーバー (SMTP) を <span class="mono">587 / STARTTLS</span> に設定し、<kbd>OK</kbd>をクリックします。</p>
+  </div></div>
+
+  <div class="step"><div class="step-no">7</div><div class="step-b">
+    <div class="step-t">テストして完了</div>
+    <p class="step-d"><kbd>次へ</kbd>をクリックすると接続テストが実行されます。受信・送信の両方に緑のチェックが付けば成功です。<kbd>閉じる</kbd>→<kbd>完了</kbd>で設定は終了です。</p>
+  </div></div>
+
+  <h2>3．設定後の確認</h2>
+  <ul>
+    <li>ご自身の別のメールアドレス（携帯電話や Gmail など）宛にテスト送信し、届くことをご確認ください。</li>
+    <li>そのメールに返信し、Outlook で受信できることをご確認ください。</li>
+    <li>差出人の表示が公開アドレス（<span class="mono">info@publicagenda.jp</span> 等）になっていることをご確認ください。</li>
+  </ul>
+
+  <h2>4．うまくいかないとき</h2>
+  <div class="tblwrap">
+    <table>
+      <thead><tr><th>症状</th><th>ご確認いただく点</th></tr></thead>
+      <tbody>
+        <tr><td class="k">パスワードを何度も聞かれる</td><td>「アカウント名」に公開アドレスを入れている可能性があります。別紙のログインユーザー名（<span class="mono">pa-</span> で始まるもの）に直してください。</td></tr>
+        <tr><td class="k">受信はできるが送信できない</td><td><kbd>送信サーバー</kbd>タブの「送信サーバー (SMTP) は認証が必要」にチェックが入っているかご確認ください。</td></tr>
+        <tr><td class="k">サーバーに接続できない</td><td>ポート（受信 <span class="mono">993</span>／送信 <span class="mono">587</span>）と暗号化の種類（SSL/TLS／STARTTLS）をご確認ください。</td></tr>
+        <tr><td class="k">差出人が pa- … で表示される</td><td>「電子メールアドレス」欄に公開アドレスが入っているかご確認ください。</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>5．補足</h2>
+  <ul>
+    <li><b>「新しい Outlook」をご利用の場合</b>：アカウント追加画面で <kbd>IMAP</kbd> を選び、本ページ1章の設定値をご入力ください。ユーザー名欄には別紙のログインユーザー名をご入力ください。</li>
+    <li><b>スマートフォンの場合</b>：標準メールアプリで「その他」→「IMAP」を選び、同じ設定値をご入力ください。</li>
+    <li><span class="mono">no-reply@publicagenda.jp</span> は送信専用のため、通常はメールソフトへの設定は不要です。</li>
+    <li><span class="mono">admin@publicagenda.jp</span> を Gmail で受信される場合は、Gmail の<kbd>設定</kbd>→<kbd>アカウントとインポート</kbd>から本ページ1章の設定値をご登録ください。</li>
+  </ul>
+
+  <div class="note">
+    ご不明な点は株式会社ITLINEまでお問い合わせください。<br>
+    本ページには認証情報（ユーザー名・パスワード）は記載しておりません。別紙「メールアドレス設定完了のご案内」とあわせてご利用ください。
+  </div>
+</div>
+</body>
+</html>
