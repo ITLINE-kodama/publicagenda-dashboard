@@ -229,6 +229,10 @@ td .nt{font-size:12px;color:var(--sub);margin-top:2px}
       <div class="tl-title">✓ お問い合わせメールの受信テスト完了（迷惑メール判定の解消を確認）</div>
       <div class="tl-sub"><span class="b cat">メール・フォーム</span><span class="b done">完了</span>通知を転送方式から各宛先への直接配信へ切替。Microsoft 365・Gmail とも受信トレイへの到達を確認</div>
     </div>
+    <div class="tl-item done"><span class="tl-date">09/08</span>
+      <div class="tl-title">✓ 窓口アドレス宛メールの自動配信を導入（受信体制の完成）</div>
+      <div class="tl-sub"><span class="b cat">メール</span><span class="b done">完了</span>info@・fellow@・admin@ に直接届いたメールも、ご担当者様へ自動でお届け（メールソフト設定不要）</div>
+    </div>
     <div class="tl-item today"><span class="tl-date">TODAY</span>
       <div class="tl-title"><span class="today-pill">本日　2026年9月8日</span></div>
     </div>
@@ -297,22 +301,22 @@ td .nt{font-size:12px;color:var(--sub);margin-top:2px}
     <thead><tr><th>アドレス</th><th>用途</th><th>作成・運用</th></tr></thead>
     <tbody>
       <tr><td><b>info@publicagenda.jp</b></td><td>総合窓口<div class="nt">お問い合わせフォームの送信先</div></td><td>✓ 作成完了<div class="nt">フォーム連携・受信テスト済（9/1）</div></td></tr>
-      <tr><td><b>fellow@publicagenda.jp</b></td><td>フェローとのやり取り</td><td>✓ 作成完了<div class="nt">受信はご担当者様のOutlookに追加して行います（下記マニュアル参照・複数名での共有可）</div></td></tr>
-      <tr><td><b>admin@publicagenda.jp</b></td><td>管理</td><td>✓ 作成完了 →<br><b>グラビス様にて Gmail 連携設定（ご対応待ち）</b></td></tr>
+      <tr><td><b>fellow@publicagenda.jp</b></td><td>フェローとのやり取り</td><td>✓ 作成完了<div class="nt">届いたメールは自動でご担当者様へ配信（メールソフト設定不要・9/8〜）</div></td></tr>
+      <tr><td><b>admin@publicagenda.jp</b></td><td>管理</td><td>✓ 作成完了 →<br><b>グラビス様にて Gmail（Google）アカウント連携（ご対応予定）</b><div class="nt">届いたメールは自動でご担当者様へ配信（9/8〜）。連携時の確認メールもそのまま受け取れます</div></td></tr>
       <tr><td><b>no-reply@publicagenda.jp</b></td><td>送信専用<div class="nt">返信を受け付けないお知らせメール</div></td><td>✓ 作成完了<div class="nt">自動返信・通知メールの送信元</div></td></tr>
     </tbody>
   </table>
   </div>
 
   <div class="panel" style="margin-top:20px;border-left:4px solid var(--done)">
-    <h3>✓ お問い合わせメールの最終構成（2026年9月1日 確定・受信テスト完了）</h3>
+    <h3>✓ お問い合わせメールの最終構成（2026年9月8日 更新・受信テスト完了）</h3>
     <div style="font-size:13.5px;line-height:2.1">
       <b>① フォームからのお問い合わせ</b>　受付通知を、古見様・岡田様・光延様・弊社（小玉）と info@publicagenda.jp（サーバー控え）へ、メール配信サービスから<b>1通ずつ直接</b>お届けします。<br>
       <b>② お問い合わせをされた方へ</b>　受付完了の自動返信をお送りします（差出人：no-reply@publicagenda.jp）。<br>
-      <b>③ フォームを通らず info@ 宛に直接届いたメール</b>　サーバーの受信箱に保管のうえ弊社（小玉）へ転送し、一次確認しています（現状はほぼ営業・迷惑メールのため）。
+      <b>③ info@・fellow@・admin@ 宛に直接届いたメール</b>　件名の頭に<b>【info@ 受信】</b>等を付けて、古見様・岡田様・光延様へ<b>自動でお届け</b>します（メールソフトの設定は不要です）。そのまま返信すると元の差出人宛に送信されます。原本はサーバーに保管し、弊社でも監視しています。あからさまな迷惑メールはサーバー側のフィルタが手前で隔離します。
     </div>
     <div class="nt" style="margin-top:10px;line-height:1.9">
-      <b>【経緯】</b>当初の「info@ で受け、サーバー転送で各位へお届けする」方式では、転送の際に送信ドメイン認証（DKIM）が崩れ、Microsoft 365 側で迷惑メールに分類される事象が発生しました。8/31 にメール配信サービス（Brevo）を導入して送信ドメイン認証を整備し、9/1 に<b>転送を介さない直接配信</b>へ切り替えて解消。同日のテストで、Microsoft 365（岡田様）・Gmail の両環境で<b>受信トレイへの到達を確認済み</b>です。<br>
+      <b>【経緯】</b>当初の「info@ で受け、サーバー転送で各位へお届けする」方式では、転送の際に送信ドメイン認証（DKIM）が崩れ、Microsoft 365 側で迷惑メールに分類される事象が発生しました。8/31 にメール配信サービス（Brevo）を導入して送信ドメイン認証を整備し、9/1 に<b>転送を介さない直接配信</b>へ切り替えて解消。同日のテストで、Microsoft 365（岡田様）・Gmail の両環境で<b>受信トレイへの到達を確認済み</b>です。9/8 には、窓口アドレス宛に直接届くメールも同じく迷惑メール判定されない経路でご担当者様へ自動配信する仕組みを追加しました。<br>
       <b>【スパム対策】</b>フォームには不可視トラップ＋reCAPTCHA v3 を実装済みです（8/29・動作確認済み）。<br>
       <b>【廃止】</b>広報用として一時作成した pa_pr_ml@publicagenda.jp は運用開始前に廃止し、<b>info@ に一本化</b>しました。宛先にはご使用にならないでください。<br>
       <b>【お願い】</b>社内のメールセキュリティが通知メールの件名に「要確認」等のタグを付ける場合があります。差出人 <b>no-reply@publicagenda.jp</b> を許可リスト（信頼できる差出人）にご登録いただくと、より確実にお受け取りいただけます。
